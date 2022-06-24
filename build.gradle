@@ -1,0 +1,23 @@
+plugins {
+    id 'maven-publish'
+    id 'signing'
+    id 'nebula.release' version '15.2.0'
+}
+
+ext.isReleaseVersion = !version.toString().endsWith("-SNAPSHOT")
+
+tasks.withType(Sign) {
+    onlyIf { isReleaseVersion }
+}
+
+tasks.snapshot {
+    finalizedBy tasks.publish
+}
+
+tasks.candidate {
+    finalizedBy tasks.publish
+}
+
+tasks.final {
+    finalizedBy tasks.publish
+}
