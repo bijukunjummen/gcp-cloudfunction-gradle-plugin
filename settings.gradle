@@ -1,0 +1,2 @@
+rootProject.name = 'gcp-cloudfunction-gradle-plugin'
+include('plugin')
