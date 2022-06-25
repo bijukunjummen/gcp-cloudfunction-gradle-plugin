@@ -39,15 +39,15 @@ tasks.withType(Sign) {
 }
 
 tasks.snapshot {
-    finalizedBy tasks.publish
+    finalizedBy tasks.publishPlugins
 }
 
 tasks.candidate {
-    finalizedBy tasks.publish
+    finalizedBy tasks.publishPlugins
 }
 
 tasks.final {
-    finalizedBy tasks.publish
+    finalizedBy tasks.publishPlugins
 }
 
 dependencies {
