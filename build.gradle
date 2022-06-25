@@ -3,12 +3,13 @@ plugins {
     id 'nebula.release' version '15.2.0'
     id 'java-gradle-plugin'
     id 'com.gradle.plugin-publish' version '0.18.0'
+    id 'maven-publish'
 }
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
-group = 'com.github.bijukunjummen'
+group = 'io.github.bijukunjummen'
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
@@ -69,7 +70,7 @@ pluginBundle {
 gradlePlugin {
     plugins {
         cloudfunction {
-            id = 'com.github.bijukunjummen.cloudfunction'
+            id = 'io.github.bijukunjummen.cloudfunction'
             implementationClass = 'com.github.bijukunjummen.cloudfunction.GcpCloudfunctionGradlePluginPlugin'
             displayName = 'Cloud Function Invoker'
             description = 'Run Invoker on Google Cloud Function'

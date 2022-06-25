@@ -25,7 +25,7 @@ class GcpCloudfunctionGradlePluginPluginFunctionalTest {
         writeString(new File(projectDir, "settings.gradle"), "");
         writeString(new File(projectDir, "build.gradle"),
             "plugins {" +
-            "  id('com.github.bijukunjummen.cloudfunction')" +
+            "  id('io.github.bijukunjummen.cloudfunction')" +
             "}");
 
         // Run the build
