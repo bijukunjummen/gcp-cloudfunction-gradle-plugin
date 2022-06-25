@@ -32,12 +32,12 @@ class GcpCloudfunctionGradlePluginPluginFunctionalTest {
         GradleRunner runner = GradleRunner.create();
         runner.forwardOutput();
         runner.withPluginClasspath();
-        runner.withArguments("greeting");
+        runner.withArguments("cloudfunction");
         runner.withProjectDir(projectDir);
         BuildResult result = runner.build();
 
         // Verify the result
-        assertTrue(result.getOutput().contains("Hello from plugin 'org.bk.function.gradle.plugin.greeting'"));
+        assertTrue(result.getOutput().contains("Hello from plugin 'org.bk.function.gradle.plugin.cloudfunction'"));
     }
 
     private void writeString(File file, String string) throws IOException {

@@ -12,8 +12,8 @@ import org.gradle.api.Plugin;
 public class GcpCloudfunctionGradlePluginPlugin implements Plugin<Project> {
     public void apply(Project project) {
         // Register a task
-        project.getTasks().register("greeting", task -> {
-            task.doLast(s -> System.out.println("Hello from plugin 'org.bk.function.gradle.plugin.greeting'"));
+        project.getTasks().register("cloudfunction", task -> {
+            task.doLast(s -> System.out.println("Hello from plugin 'org.bk.function.gradle.plugin.cloudfunction'"));
         });
     }
 }

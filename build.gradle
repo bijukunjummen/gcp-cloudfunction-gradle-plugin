@@ -68,9 +68,11 @@ pluginBundle {
 
 gradlePlugin {
     plugins {
-        greeting {
+        cloudfunction {
             id = 'com.github.bijukunjummen.cloudfunction'
             implementationClass = 'com.github.bijukunjummen.cloudfunction.GcpCloudfunctionGradlePluginPlugin'
+            displayName = 'Cloud Function Invoker'
+            description = 'Run Invoker on Google Cloud Function'
         }
     }
 }
