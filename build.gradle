@@ -1,10 +1,38 @@
 plugins {
-    id 'maven-publish'
     id 'signing'
     id 'nebula.release' version '15.2.0'
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.18.0'
+}
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+group = 'com.github.bijukunjummen'
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+ext{
+    functionInvokerVersion = "1.1.0"
+    functionsApiVersion = "1.0.4"
 }
 
-ext.isReleaseVersion = !version.toString().endsWith("-SNAPSHOT")
+ext.isSnapshot = version.toString().endsWith("-SNAPSHOT")
+ext.isReleaseVersion = !ext.isSnapshot
+
+if (ext.isSnapshot) {
+    apply plugin: 'maven-publish'
+
+    publishing {
+        repositories {
+            mavenLocal()
+        }
+    }
+
+    task install {
+        dependsOn publishToMavenLocal
+    }
+}
 
 tasks.withType(Sign) {
     onlyIf { isReleaseVersion }
@@ -21,3 +49,103 @@ tasks.candidate {
 tasks.final {
     finalizedBy tasks.publish
 }
+
+dependencies {
+    implementation("com.google.cloud.functions.invoker:java-function-invoker:${functionInvokerVersion}")
+    testImplementation('org.junit.jupiter:junit-jupiter:5.7.1')
+}
+
+//java {
+//    withJavadocJar()
+//    withSourcesJar()
+//}
+
+gradlePlugin {
+    plugins {
+        greeting {
+            id = 'com.github.bijukunjummen.cloudfunction'
+            implementationClass = 'com.github.bijukunjummen.cloudfunction.GcpCloudfunctionGradlePluginPlugin'
+        }
+    }
+}
+
+// Add a source set for the functional test suite
+sourceSets {
+    functionalTest {
+    }
+}
+
+gradlePlugin.testSourceSets(sourceSets.functionalTest)
+configurations.functionalTestImplementation.extendsFrom(configurations.testImplementation)
+
+// Add a task to run the functional tests
+tasks.register('functionalTest', Test) {
+    testClassesDirs = sourceSets.functionalTest.output.classesDirs
+    classpath = sourceSets.functionalTest.runtimeClasspath
+    useJUnitPlatform()
+}
+
+tasks.named('check') {
+    // Run the functional tests as part of `check`
+    dependsOn(tasks.functionalTest)
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
+
+//publishing {
+//    repositories {
+//        maven {
+//            def snapshotUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+//            def releaseUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+//
+//            url = isReleaseVersion ? releaseUrl : snapshotUrl
+//            credentials {
+//                username ossrhUsername
+//                password ossrhPassword
+//            }
+//        }
+//    }
+//    publications {
+//        mavenJava(MavenPublication) {
+//            from components.java
+//            pom {
+//                name = project.name
+//                description = 'Plugin to start an invoker endpoint for GCP Cloud Function'
+//                url = 'https://github.com/bijukunjummen/gcp-cloudfunction-gradle-plugin.git'
+//                inceptionYear = '2021'
+//
+//                packaging = 'jar'
+//                groupId = project.group
+//                artifactId = project.name
+//                version = project.version
+//
+//                licenses {
+//                    license {
+//                        name = 'The Apache Software License, Version 2.0'
+//                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                        distribution = 'repo'
+//                    }
+//                }
+//                scm {
+//                    connection = 'https://github.com/bijukunjummen/gcp-cloudfunction-gradle-plugin.git'
+//                    url = 'https://github.com/bijukunjummen/gcp-cloudfunction-gradle-plugin.git'
+//
+//                }
+//                developers {
+//                    developer {
+//                        name = 'Biju Kunjummen'
+//                        id = 'bijukunjummen'
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+
+//signing {
+//    sign publishing.publications.mavenJava
+//}
