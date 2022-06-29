@@ -1,17 +1,17 @@
 plugins {
-    id 'signing'
+//    id 'signing'
     id 'nebula.release' version '15.2.0'
     id 'java-gradle-plugin'
     id 'com.gradle.plugin-publish' version '0.18.0'
     id 'maven-publish'
 }
 repositories {
-    // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 group = 'io.github.bijukunjummen'
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
+//version="0.10-rc6"
 
 ext{
     functionInvokerVersion = "1.1.0"
@@ -21,35 +21,33 @@ ext{
 ext.isSnapshot = version.toString().endsWith("-SNAPSHOT")
 ext.isReleaseVersion = !ext.isSnapshot
 
-if (ext.isSnapshot) {
-    apply plugin: 'maven-publish'
-
+//if (ext.isSnapshot) {
     publishing {
         repositories {
             mavenLocal()
         }
     }
 
-    task install {
-        dependsOn publishToMavenLocal
-    }
-}
+//    task install {
+//        dependsOn publishToMavenLocal
+//    }
+//}
 
 tasks.withType(Sign) {
     onlyIf { isReleaseVersion }
 }
 
-tasks.snapshot {
-    finalizedBy tasks.publishPlugins
-}
-
-tasks.candidate {
-    finalizedBy tasks.publishPlugins
-}
-
-tasks.final {
-    finalizedBy tasks.publishPlugins
-}
+//tasks.snapshot {
+//    finalizedBy tasks.publishPlugins
+//}
+//
+//tasks.candidate {
+//    finalizedBy tasks.publishPlugins
+//}
+//
+//tasks.final {
+//    finalizedBy tasks.publishPlugins
+//}
 
 dependencies {
     implementation("com.google.cloud.functions.invoker:java-function-invoker:${functionInvokerVersion}")
@@ -100,7 +98,6 @@ tasks.named('check') {
 }
 
 tasks.named('test') {
-    // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
 

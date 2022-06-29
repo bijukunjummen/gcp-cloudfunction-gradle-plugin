@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * A simple functional test for the 'org.bk.function.gradle.plugin.greeting' plugin.
  */
-class GcpCloudfunctionGradlePluginPluginFunctionalTest {
+class GcpCloudfunctionGradlePluginFunctionalTest {
     @Test
     void canRunTask() throws IOException {
         // Setup the test build

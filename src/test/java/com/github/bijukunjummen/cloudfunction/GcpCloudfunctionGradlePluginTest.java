@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * A simple unit test for the 'org.bk.function.gradle.plugin.greeting' plugin.
  */
-class GcpCloudfunctionGradlePluginPluginTest {
+class GcpCloudfunctionGradlePluginTest {
 	@Test
 	void pluginRegistersATask() {
 		// Create a test project and apply the plugin
