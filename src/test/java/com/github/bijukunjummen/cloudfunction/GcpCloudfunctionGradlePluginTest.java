@@ -20,6 +20,6 @@ class GcpCloudfunctionGradlePluginTest {
 		project.getPlugins().apply("io.github.bijukunjummen.cloudfunction");
 
 		// Verify the result
-		assertNotNull(project.getTasks().findByName("cloudfunction"));
+		assertNotNull(project.getTasks().findByName("cloudfunctionInvoker"));
 	}
 }

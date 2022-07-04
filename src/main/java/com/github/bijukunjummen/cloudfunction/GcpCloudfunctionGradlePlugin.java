@@ -4,8 +4,12 @@
 package com.github.bijukunjummen.cloudfunction;
 
 import com.github.bijukunjummen.cloudfunction.task.CloudFunctionInvokerTask;
+import com.google.cloud.functions.invoker.runner.Invoker;
 import org.gradle.api.Project;
 import org.gradle.api.Plugin;
+import org.gradle.api.artifacts.Configuration;
+import org.gradle.api.artifacts.ConfigurationContainer;
+import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency;
 import org.gradle.api.tasks.TaskProvider;
 
 /**
@@ -17,10 +21,10 @@ public class GcpCloudfunctionGradlePlugin implements Plugin<Project> {
     public void apply(Project project) {
         CloudFunctionInvokerExtension invokerExtension =
                 project.getExtensions().create(CLOUDFUNCTION_INVOKER_NAME, CloudFunctionInvokerExtension.class, project);
-
         TaskProvider<CloudFunctionInvokerTask> buildImageTask = project.getTasks()
                 .register("cloudfunctionInvoker", CloudFunctionInvokerTask.class, task -> {
                     task.setInvokerExtension(invokerExtension);
+                    task.getMainClass().set("com.google.cloud.functions.invoker.runner.Invoker");
                 });
     }
 }

@@ -37,17 +37,17 @@ tasks.withType(Sign) {
     onlyIf { isReleaseVersion }
 }
 
-//tasks.snapshot {
-//    finalizedBy tasks.publishPlugins
-//}
-//
-//tasks.candidate {
-//    finalizedBy tasks.publishPlugins
-//}
-//
-//tasks.final {
-//    finalizedBy tasks.publishPlugins
-//}
+tasks.snapshot {
+    finalizedBy tasks.publish
+}
+
+tasks.candidate {
+    finalizedBy tasks.publish
+}
+
+tasks.final {
+    finalizedBy tasks.publish
+}
 
 dependencies {
     implementation("com.google.cloud.functions.invoker:java-function-invoker:${functionInvokerVersion}")
@@ -69,7 +69,7 @@ gradlePlugin {
     plugins {
         cloudfunction {
             id = 'io.github.bijukunjummen.cloudfunction'
-            implementationClass = 'com.github.bijukunjummen.cloudfunction.GcpCloudfunctionGradlePluginPlugin'
+            implementationClass = 'com.github.bijukunjummen.cloudfunction.GcpCloudfunctionGradlePlugin'
             displayName = 'Cloud Function Invoker'
             description = 'Run Invoker on Google Cloud Function'
         }

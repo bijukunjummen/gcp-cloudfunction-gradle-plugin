@@ -26,8 +26,8 @@ public class CloudFunctionInvokerExtension {
     @Override
     public String toString() {
         return "CloudFunctionInvokerExtension{" +
-                "target=" + target +
-                ", port=" + port +
+                "target=" + target.getOrElse("Not set") +
+                ", port=" + port.getOrElse(-1) +
                 '}';
     }
 }
