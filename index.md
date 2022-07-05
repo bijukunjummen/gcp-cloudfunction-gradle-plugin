@@ -1,37 +1,34 @@
-## Welcome to GitHub Pages
+## Google Cloud Function Gradle Plugin
 
-You can use the [editor on GitHub](https://github.com/bijukunjummen/gcp-cloudfunction-gradle-plugin/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+This is a [Gradle Plugin](https://plugins.gradle.org/) that makes it easy to test a Java based Google Cloud Function locally for Gradle based projects.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+### Using the Plugin
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Add the plugin to the `build.gradle` file the following way:
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```gradle
+plugins{
+  id 'java'
+  id "io.github.bijukunjummen.cloudfunction"
+}
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+Note that the plugin depends on `java` plugin being present. 
 
-### Jekyll Themes
+Provide details of the endpoint that the function exposes:
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/bijukunjummen/gcp-cloudfunction-gradle-plugin/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```gradle
+cloudFunctionInvoker {
+  target = "functions.HelloHttp"
+  port = 8080
+}
+```
 
-### Support or Contact
+This snippet indicates that the function being exposed is from `functions.HelloHttp` class, and the endpoint should be available locally at port 8080.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+A local version of the function can now be started up this way:
+
+```sh
+./gradlew cloudFunctionInvoker
+```
