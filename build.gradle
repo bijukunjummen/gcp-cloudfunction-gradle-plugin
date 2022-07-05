@@ -51,7 +51,7 @@ tasks.final {
 
 dependencies {
     implementation("com.google.cloud.functions.invoker:java-function-invoker:${functionInvokerVersion}")
-    testImplementation('org.junit.jupiter:junit-jupiter:5.7.1')
+    testImplementation('org.junit.jupiter:junit-jupiter:5.8.2')
 }
 
 java {
@@ -60,7 +60,7 @@ java {
 }
 
 pluginBundle {
-    website = 'https://github.com/bijukunjummen/gcp-cloudfunction-gradle-plugin'
+    website = 'https://bijukunjummen.github.io/gcp-cloudfunction-gradle-plugin/'
     vcsUrl = 'https://github.com/bijukunjummen/gcp-cloudfunction-gradle-plugin'
     tags = ['gcp', 'java', 'serverless']
 }
