@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * A simple unit test for the 'org.bk.function.gradle.plugin.greeting' plugin.
  */
-class GcpCloudfunctionGradlePluginTest {
+class GcpCloudFunctionGradlePluginTest {
 	@Test
 	void pluginRegistersATask() {
 		// Create a test project and apply the plugin
@@ -21,6 +21,6 @@ class GcpCloudfunctionGradlePluginTest {
 		project.getPlugins().apply("io.github.bijukunjummen.cloudfunction");
 
 		// Verify the result
-		assertNotNull(project.getTasks().findByName("cloudfunctionInvoker"));
+		assertNotNull(project.getTasks().findByName("cloudFunctionInvoker"));
 	}
 }

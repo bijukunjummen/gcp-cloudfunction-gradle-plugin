@@ -13,8 +13,8 @@ import org.gradle.api.plugins.JavaPluginExtension;
  *
  * @author Biju Kunjummen
  */
-public class GcpCloudfunctionGradlePlugin implements Plugin<Project> {
-    private static final String CLOUDFUNCTION_INVOKER_NAME = "cloudfunctionInvoker";
+public class GcpCloudFunctionGradlePlugin implements Plugin<Project> {
+    private static final String CLOUDFUNCTION_INVOKER_NAME = "cloudFunctionInvoker";
     public static final String INVOKER_GROUP = "com.google.cloud.functions.invoker";
     public static final String INVOKER_MODULE = "java-function-invoker";
 

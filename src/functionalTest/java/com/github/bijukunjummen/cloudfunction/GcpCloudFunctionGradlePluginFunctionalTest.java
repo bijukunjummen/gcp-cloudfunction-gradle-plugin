@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * A simple functional test for the 'org.bk.function.gradle.plugin.greeting' plugin.
  */
-class GcpCloudfunctionGradlePluginFunctionalTest {
+class GcpCloudFunctionGradlePluginFunctionalTest {
     @Test
     void canRunTask() throws IOException {
         // Setup the test build
@@ -35,7 +35,7 @@ class GcpCloudfunctionGradlePluginFunctionalTest {
                         repositories {
                           mavenCentral()
                         } 
-                        cloudfunctionInvoker {
+                        cloudFunctionInvoker {
                           target = "com.github.bijukunjummen.cloudfunction.HelloHttp"
                           testMode = true
                         }
@@ -45,13 +45,13 @@ class GcpCloudfunctionGradlePluginFunctionalTest {
         GradleRunner runner = GradleRunner.create();
         runner.forwardOutput();
         runner.withPluginClasspath();
-        runner.withArguments("cloudfunctionInvoker");
+        runner.withArguments("cloudFunctionInvoker");
         runner.withProjectDir(projectDir);
         BuildResult result = runner.build();
 
         // Verify the result
         String output = result.getOutput();
-        assertTrue(output.contains("cloudfunctionInvoker"));
+        assertTrue(output.contains("cloudFunctionInvoker"));
     }
 
     private void writeString(File file, String string) throws IOException {
