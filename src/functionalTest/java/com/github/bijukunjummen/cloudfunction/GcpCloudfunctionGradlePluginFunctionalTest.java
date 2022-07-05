@@ -3,15 +3,18 @@
  */
 package com.github.bijukunjummen.cloudfunction;
 
+import org.gradle.testkit.runner.BuildResult;
+import org.gradle.testkit.runner.GradleRunner;
+import org.junit.jupiter.api.Test;
+
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.io.FileWriter;
 import java.nio.file.Files;
-import org.gradle.testkit.runner.GradleRunner;
-import org.gradle.testkit.runner.BuildResult;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 /**
  * A simple functional test for the 'org.bk.function.gradle.plugin.greeting' plugin.
@@ -24,9 +27,19 @@ class GcpCloudfunctionGradlePluginFunctionalTest {
         Files.createDirectories(projectDir.toPath());
         writeString(new File(projectDir, "settings.gradle"), "");
         writeString(new File(projectDir, "build.gradle"),
-            "plugins {" +
-            "  id('io.github.bijukunjummen.cloudfunction')" +
-            "}");
+                """
+                        plugins {
+                          id('java')
+                          id('io.github.bijukunjummen.cloudfunction')
+                        }
+                        repositories {
+                          mavenCentral()
+                        } 
+                        cloudfunctionInvoker {
+                          target = "com.github.bijukunjummen.cloudfunction.HelloHttp"
+                          testMode = true
+                        }
+                        """);
 
         // Run the build
         GradleRunner runner = GradleRunner.create();
@@ -38,8 +51,7 @@ class GcpCloudfunctionGradlePluginFunctionalTest {
 
         // Verify the result
         String output = result.getOutput();
-        System.out.println(output);
-        assertTrue(output.contains("Cloud Function Invoker called.."));
+        assertTrue(output.contains("cloudfunctionInvoker"));
     }
 
     private void writeString(File file, String string) throws IOException {

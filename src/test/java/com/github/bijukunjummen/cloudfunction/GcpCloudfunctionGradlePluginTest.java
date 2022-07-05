@@ -17,6 +17,7 @@ class GcpCloudfunctionGradlePluginTest {
 	void pluginRegistersATask() {
 		// Create a test project and apply the plugin
 		Project project = ProjectBuilder.builder().build();
+		project.getPlugins().apply("java");
 		project.getPlugins().apply("io.github.bijukunjummen.cloudfunction");
 
 		// Verify the result
