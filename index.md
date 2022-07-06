@@ -32,3 +32,9 @@ A local version of the function can now be started up this way:
 ```sh
 ./gradlew cloudFunctionInvoker
 ```
+
+### Samples
+Here are two sample projects which use the plugin:
+
+1. [Http Cloud Function](https://github.com/bijukunjummen/http-cloudfunction-java-gradle)
+2. [Pub/Sub Cloud Function](https://github.com/bijukunjummen/pubsub-cloudfunction-java-gradle)
