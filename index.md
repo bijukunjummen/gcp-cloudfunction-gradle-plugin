@@ -19,7 +19,7 @@ Note that the plugin depends on `java` plugin being present.
 Provide details of the endpoint that the function exposes:
 
 ```gradle
-cloudFunctionInvoker {
+cloudFunction {
   target = "functions.HelloHttp"
   port = 8080
 }
@@ -30,7 +30,7 @@ This snippet indicates that the function being exposed is from `functions.HelloH
 A local version of the function can now be started up this way:
 
 ```sh
-./gradlew cloudFunctionInvoker
+./gradlew cloudFunctionRun
 ```
 
 ### Samples
