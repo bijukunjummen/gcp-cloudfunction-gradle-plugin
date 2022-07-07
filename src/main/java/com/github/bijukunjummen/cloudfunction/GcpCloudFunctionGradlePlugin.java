@@ -1,6 +1,6 @@
 package com.github.bijukunjummen.cloudfunction;
 
-import com.github.bijukunjummen.cloudfunction.task.CloudFunctionInvokerTask;
+import com.github.bijukunjummen.cloudfunction.task.CloudFunctionRunTask;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
@@ -14,7 +14,7 @@ import org.gradle.api.plugins.JavaPluginExtension;
  * @author Biju Kunjummen
  */
 public class GcpCloudFunctionGradlePlugin implements Plugin<Project> {
-    private static final String CLOUDFUNCTION_INVOKER_NAME = "cloudFunctionInvoker";
+    private static final String CLOUDFUNCTION_EXTENSION_NAME = "cloudFunction";
     public static final String INVOKER_GROUP = "com.google.cloud.functions.invoker";
     public static final String INVOKER_MODULE = "java-function-invoker";
 
@@ -23,19 +23,19 @@ public class GcpCloudFunctionGradlePlugin implements Plugin<Project> {
         if (javaPluginExtension == null) {
             throw new RuntimeException("Cloudfunction Plugin requires Java Plugin as a Pre-requisite");
         }
-        CloudFunctionInvokerExtension invokerExtension = project.getExtensions()
-                .create(CLOUDFUNCTION_INVOKER_NAME, CloudFunctionInvokerExtension.class, project);
+        CloudFunctionExtension cloudFunctionExtension = project.getExtensions()
+                .create(CLOUDFUNCTION_EXTENSION_NAME, CloudFunctionExtension.class, project);
         ConfigurationContainer configurations = project.getConfigurations();
 
         // Adds function invoker as a dependency
         Configuration invokerConfiguration = configurations.create(Constants.INVOKER_CONFIGURATION_NAME);
         invokerConfiguration.getDependencies()
                 .add(new DefaultExternalModuleDependency(
-                        INVOKER_GROUP, INVOKER_MODULE, invokerExtension.getInvokerVersion().get()));
+                        INVOKER_GROUP, INVOKER_MODULE, cloudFunctionExtension.getInvokerVersion().get()));
 
         // Register the task to be able to start the invoker
         project.getTasks()
-                .register(Constants.INVOKER_TASK_NAME, CloudFunctionInvokerTask.class,
-                        task -> task.setInvokerExtension(invokerExtension));
+                .register(Constants.CLOUD_FUNCTION_RUN_TASK, CloudFunctionRunTask.class,
+                        task -> task.setInvokerExtension(cloudFunctionExtension));
     }
 }

@@ -5,11 +5,11 @@ import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.Property;
 
 /**
- * Holds the properties associated with Cloud Invoker
+ * Holds the properties associated with Cloud Function
  *
  * @author Biju Kunjummen
  */
-public class CloudFunctionInvokerExtension {
+public class CloudFunctionExtension {
     private static Integer DEFAULT_PORT = 8080;
     private static String DEFAULT_INVOKER_VERSION = "1.1.0";
     private Property<String> target;
@@ -18,7 +18,7 @@ public class CloudFunctionInvokerExtension {
 
     private Property<Boolean> testMode;
 
-    public CloudFunctionInvokerExtension(Project project) {
+    public CloudFunctionExtension(Project project) {
         ObjectFactory objectFactory = project.getObjects();
         this.port = objectFactory.property(Integer.class).convention(DEFAULT_PORT);
         this.target = objectFactory.property(String.class);
@@ -44,10 +44,11 @@ public class CloudFunctionInvokerExtension {
 
     @Override
     public String toString() {
-        return "CloudFunctionInvokerExtension{" +
-                "target=" + target.getOrElse("Not set..") +
-                ", port=" + port.get() +
-                ", invokerVersion=" + invokerVersion.get() +
-                '}';
+        return """
+                cloudFunction {
+                target = "%s"
+                port = %d
+                invokerVersion = "%s"
+                }""".formatted(target.getOrElse("Not Set"), port.get(), invokerVersion.get());
     }
 }

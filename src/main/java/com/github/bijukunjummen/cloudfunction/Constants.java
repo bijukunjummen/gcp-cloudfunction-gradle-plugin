@@ -5,5 +5,5 @@ package com.github.bijukunjummen.cloudfunction;
  */
 public interface Constants {
     String INVOKER_CONFIGURATION_NAME = "invoker";
-    String INVOKER_TASK_NAME = "cloudFunctionInvoker";
+    String CLOUD_FUNCTION_RUN_TASK = "cloudFunctionRun";
 }
