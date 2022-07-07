@@ -1,6 +1,6 @@
 ## Google Cloud Function Gradle Plugin
 
-This is a [Gradle Plugin](https://plugins.gradle.org/) that makes it easy to test a Java based Google Cloud Function locally for Gradle based projects.
+This is a [Gradle Plugin](https://plugins.gradle.org/plugin/io.github.bijukunjummen.cloudfunction) that makes it easy to test a Java based Google Cloud Function locally for Gradle based projects.
 
 
 ### Using the Plugin
