@@ -1,10 +1,8 @@
 ## Google Cloud Function Gradle Plugin
 
-This is a [Gradle Plugin](https://plugins.gradle.org/) that makes it easy to test a Java based Google Cloud Function locally for Gradle based projects.
-
+This is a [Gradle Plugin](https://bijukunjummen.github.io/gcp-cloudfunction-gradle-plugin/) that makes it easy to test a Java based Google Cloud Function locally for Gradle based projects.
 
 ### Using the Plugin
-
 Add the plugin to the `build.gradle` file the following way:
 
 ```gradle
@@ -19,7 +17,7 @@ Note that the plugin depends on `java` plugin being present.
 Provide details of the endpoint that the function exposes:
 
 ```gradle
-cloudFunctionInvoker {
+cloudFunction {
   target = "functions.HelloHttp"
   port = 8080
 }
@@ -30,5 +28,10 @@ This snippet indicates that the function being exposed is from `functions.HelloH
 A local version of the function can now be started up this way:
 
 ```sh
-./gradlew cloudFunctionInvoker
+./gradlew cloudFunctionRun
 ```
+
+### Samples
+Here are two sample projects which use the plugin:
+1. [Http Cloud Function](https://github.com/bijukunjummen/http-cloudfunction-java-gradle)
+2. [Pub/Sub Cloud Function](https://github.com/bijukunjummen/pubsub-cloudfunction-java-gradle)
