@@ -19,7 +19,7 @@ Note that the plugin depends on `java` plugin being present.
 Provide details of the endpoint that the function exposes:
 
 ```gradle
-cloudFunction {
+cloudFunctionRun {
   target = "functions.HelloHttp"
   port = 8080
 }
