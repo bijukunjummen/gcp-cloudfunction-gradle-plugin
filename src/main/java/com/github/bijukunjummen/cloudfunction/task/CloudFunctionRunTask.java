@@ -1,6 +1,6 @@
 package com.github.bijukunjummen.cloudfunction.task;
 
-import com.github.bijukunjummen.cloudfunction.CloudFunctionExtension;
+import com.github.bijukunjummen.cloudfunction.CloudFunctionRunExtension;
 import com.github.bijukunjummen.cloudfunction.Constants;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.ConfigurationContainer;
@@ -20,7 +20,7 @@ public class CloudFunctionRunTask extends JavaExec {
     public static final String INVOKER_MAIN_CLASS = "com.google.cloud.functions.invoker.runner.Invoker";
     public static final String RUNTIME_CLASSPATH = "runtimeClasspath";
     public static final String MAIN_SOURCESET = "main";
-    private CloudFunctionExtension invokerExtension;
+    private CloudFunctionRunExtension invokerExtension;
 
     public CloudFunctionRunTask() {
         getMainClass().set(INVOKER_MAIN_CLASS);
@@ -33,7 +33,7 @@ public class CloudFunctionRunTask extends JavaExec {
         this.getInputs().files(runtimeClasspathConfiguration, main.getOutput());
     }
 
-    public void setInvokerExtension(CloudFunctionExtension invokerExtension) {
+    public void setInvokerExtension(CloudFunctionRunExtension invokerExtension) {
         this.invokerExtension = invokerExtension;
     }
 

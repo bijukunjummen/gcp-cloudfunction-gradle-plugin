@@ -32,7 +32,7 @@ class GcpCloudFunctionGradlePluginFunctionalTest {
                         repositories {
                           mavenCentral()
                         } 
-                        cloudFunction {
+                        cloudFunctionRun {
                           target = "com.github.bijukunjummen.cloudfunction.HelloHttp"
                           testMode = true
                         }
@@ -48,7 +48,6 @@ class GcpCloudFunctionGradlePluginFunctionalTest {
 
         // Verify the result
         String output = result.getOutput();
-        System.out.println(output);
         assertTrue(output.contains("cloudFunctionRun"));
     }
 
