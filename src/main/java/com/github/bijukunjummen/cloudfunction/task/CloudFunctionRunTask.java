@@ -26,10 +26,8 @@ public class CloudFunctionRunTask extends JavaExec {
         getMainClass().set(INVOKER_MAIN_CLASS);
         JavaPluginExtension javaPluginExtension = getProject().getExtensions().getByType(JavaPluginExtension.class);
         ConfigurationContainer configurations = getProject().getConfigurations();
-        Configuration invokerConfiguration = configurations.getAt(Constants.INVOKER_CONFIGURATION_NAME);
         Configuration runtimeClasspathConfiguration = configurations.getAt(RUNTIME_CLASSPATH);
         SourceSet main = javaPluginExtension.getSourceSets().getByName(MAIN_SOURCESET);
-        this.setClasspath(invokerConfiguration);
         this.getInputs().files(runtimeClasspathConfiguration, main.getOutput());
     }
 

@@ -11,7 +11,7 @@ import org.gradle.api.provider.Property;
  */
 public abstract class CloudFunctionRunExtension {
     private static Integer DEFAULT_PORT = 8080;
-    private static String DEFAULT_INVOKER_VERSION = "1.1.0";
+    private static String DEFAULT_INVOKER_VERSION = "1.2.1";
 
     public CloudFunctionRunExtension(Project project) {
         getPort().convention(DEFAULT_PORT);

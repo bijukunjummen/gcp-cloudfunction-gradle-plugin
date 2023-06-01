@@ -14,7 +14,7 @@ targetCompatibility = JavaVersion.VERSION_17
 //version="0.10-rc6"
 
 ext{
-    functionInvokerVersion = "1.1.0"
+    functionInvokerVersion = "1.2.1"
     functionsApiVersion = "1.0.4"
 }
 
