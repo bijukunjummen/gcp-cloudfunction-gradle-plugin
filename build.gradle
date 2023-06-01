@@ -2,7 +2,7 @@ plugins {
 //    id 'signing'
     id 'nebula.release' version '15.2.0'
     id 'java-gradle-plugin'
-    id 'com.gradle.plugin-publish' version '0.18.0'
+    id 'com.gradle.plugin-publish' version '1.2.0'
     id 'maven-publish'
 }
 repositories {
@@ -100,58 +100,3 @@ tasks.named('check') {
 tasks.named('test') {
     useJUnitPlatform()
 }
-
-
-//publishing {
-//    repositories {
-//        maven {
-//            def snapshotUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
-//            def releaseUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-//
-//            url = isReleaseVersion ? releaseUrl : snapshotUrl
-//            credentials {
-//                username ossrhUsername
-//                password ossrhPassword
-//            }
-//        }
-//    }
-//    publications {
-//        mavenJava(MavenPublication) {
-//            from components.java
-//            pom {
-//                name = project.name
-//                description = 'Plugin to start an invoker endpoint for GCP Cloud Function'
-//                url = 'https://github.com/bijukunjummen/gcp-cloudfunction-gradle-plugin.git'
-//                inceptionYear = '2021'
-//
-//                packaging = 'jar'
-//                groupId = project.group
-//                artifactId = project.name
-//                version = project.version
-//
-//                licenses {
-//                    license {
-//                        name = 'The Apache Software License, Version 2.0'
-//                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-//                        distribution = 'repo'
-//                    }
-//                }
-//                scm {
-//                    connection = 'https://github.com/bijukunjummen/gcp-cloudfunction-gradle-plugin.git'
-//                    url = 'https://github.com/bijukunjummen/gcp-cloudfunction-gradle-plugin.git'
-//
-//                }
-//                developers {
-//                    developer {
-//                        name = 'Biju Kunjummen'
-//                        id = 'bijukunjummen'
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
-
-//signing {
-//    sign publishing.publications.mavenJava
-//}

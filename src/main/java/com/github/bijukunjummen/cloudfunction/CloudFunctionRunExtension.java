@@ -19,12 +19,31 @@ public abstract class CloudFunctionRunExtension {
         getTestMode().convention(Boolean.FALSE);
     }
 
+    /**
+     * GCP Cloud Function target method
+     *
+     * @return the name of the target method
+     */
     public abstract Property<String> getTarget();
 
+    /**
+     * Port to expose the function on
+     *
+     * @return port number
+     */
     public abstract Property<Integer> getPort();
 
+    /**
+     * Version of the invoker function to use
+     *
+     * @return
+     */
     public abstract Property<String> getInvokerVersion();
 
+    /**
+     *
+     * @return
+     */
     public abstract Property<Boolean> getTestMode();
 
     @Override

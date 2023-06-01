@@ -2,17 +2,18 @@ package com.github.bijukunjummen.cloudfunction.task;
 
 import com.github.bijukunjummen.cloudfunction.CloudFunctionRunExtension;
 import com.github.bijukunjummen.cloudfunction.Constants;
+import com.github.bijukunjummen.cloudfunction.GcpCloudFunctionGradlePlugin;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.ConfigurationContainer;
-import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.SourceSet;
-
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Task responsible for starting the Google Cloud function invoker, a local instance of the running
@@ -22,10 +23,12 @@ import java.util.List;
  */
 public class CloudFunctionRunTask extends JavaExec {
 
-  public static final String INVOKER_MAIN_CLASS = "com.google.cloud.functions.invoker.runner.Invoker";
-  public static final String RUNTIME_CLASSPATH = "runtimeClasspath";
-  public static final String MAIN_SOURCESET = "main";
+  private static final String INVOKER_MAIN_CLASS = "com.google.cloud.functions.invoker.runner.Invoker";
+  private static final String RUNTIME_CLASSPATH = "runtimeClasspath";
+  private static final String MAIN_SOURCESET = "main";
   private List<File> classpathFileLocations = new ArrayList<>();
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(GcpCloudFunctionGradlePlugin.class);
   private CloudFunctionRunExtension invokerExtension;
 
   public CloudFunctionRunTask() {
@@ -60,6 +63,11 @@ public class CloudFunctionRunTask extends JavaExec {
             "--port", invokerExtension.getPort().get(),
             "--classpath", classpathFileCollection));
 
+    if (invokerExtension.getTestMode().get()) {
+      LOGGER.info("Classpath = {}", classpathFileCollection);
+    } else {
+      LOGGER.debug("Classpath = {}", classpathFileCollection);
+    }
     if (!invokerExtension.getTestMode().get()) {
       super.exec();
     }
